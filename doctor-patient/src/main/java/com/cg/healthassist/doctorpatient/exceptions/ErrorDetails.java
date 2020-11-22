@@ -1,6 +1,12 @@
 package com.cg.healthassist.doctorpatient.exceptions;
 
 import java.util.Date;
+/**
+ * This is a ErrorDetails exception class
+ * @author perumallu
+ *
+ * 
+ */
 
 public class ErrorDetails {
 	private Date timestamp;

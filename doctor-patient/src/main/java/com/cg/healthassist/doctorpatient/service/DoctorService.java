@@ -1,6 +1,8 @@
 package com.cg.healthassist.doctorpatient.service;
+import com.cg.healthassist.doctorpatient.exceptions.PatientNotFoundException;
 import com.cg.healthassist.doctorpatient.model.Patient;
 /**
+ * This is an interface for DoctorService Class
  * @author perumallu
  *
  * 
@@ -8,8 +10,13 @@ import com.cg.healthassist.doctorpatient.model.Patient;
 
 
 public interface DoctorService {
-	
-	public Patient findPatientById(Integer patientId);
-	public Patient addPrescriptionsById(Integer patientId, String prescription);
+	/**
+	 * This method takes patientId and finds Patient
+	 */
+	public Patient findPatientById(Integer patientId) throws PatientNotFoundException;
+	/**
+	 * This method takes PatientId and prescription and adds Prescription
+	 */
+	public Patient addPrescriptionsById(Integer patientId, String prescription) throws PatientNotFoundException;
 
 }

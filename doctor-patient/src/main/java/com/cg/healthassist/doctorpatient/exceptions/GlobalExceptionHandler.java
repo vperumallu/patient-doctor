@@ -7,17 +7,28 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * This is a GlobalExceptionHandler class 
+ * @author perumallu
+ *
+ * 
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
+	/**
+	 * Exception handler for global exception
+	 */
 	@ExceptionHandler(PatientNotFoundException.class)
 	public ResponseEntity<?> resourceNotFoundException(PatientNotFoundException ex, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	}
-
+/**
+ * Exception handler for validation error messages
+ */
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> globleExcpetionHandler(Exception ex, WebRequest request) {
-		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+		ErrorDetails errorDetails = new ErrorDetails(new Date(), "enter valid data", request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

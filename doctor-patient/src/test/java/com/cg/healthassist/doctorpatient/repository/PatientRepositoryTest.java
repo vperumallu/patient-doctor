@@ -11,7 +11,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cg.healthassist.doctorpatient.model.Patient;
+
 /**
+ * This is patient repository test class
+ * 
  * @author perumallu
  *
  * 
@@ -20,17 +23,16 @@ import com.cg.healthassist.doctorpatient.model.Patient;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 class PatientRepositoryTest {
-	
+
 	@Autowired
 	private PatientRepository patientRepository;
-	
-	 @Autowired
-	    private TestEntityManager testEntityManager;
 
+	@Autowired
+	private TestEntityManager testEntityManager;
 
 	@Test
 	/**
-	 This method is to test to find patient by Id 
+	 * This method is to test to find patient by Id
 	 */
 	public void testFindPatientById() {
 		Patient patient = new Patient();
@@ -41,18 +43,19 @@ class PatientRepositoryTest {
 		patient.setPatientId(1);
 		patient.setPatientName("ram");
 		patient.setPrescription("crocine");
-				Patient saveInDb =testEntityManager.persist(patient);
-		Patient getInDb=patientRepository.findById(patient.getPatientId()).get();
-				assertEquals(getInDb,saveInDb);
+		Patient saveInDb = testEntityManager.persist(patient);
+		Patient getInDb = patientRepository.findById(patient.getPatientId()).get();
+		assertEquals(getInDb, saveInDb);
 
 	}
+
 	@Test
 	/**
-	 This method is to test to add prescription
+	 * This method is to test to add prescription
 	 */
 
 	public void testAddPrescription() {
-				Patient patient = new Patient();
+		Patient patient = new Patient();
 		patient.setAge(4);
 		patient.setAddress("hyd");
 		patient.setBloodGroup("ab+");
@@ -60,13 +63,13 @@ class PatientRepositoryTest {
 		patient.setPatientId(1);
 		patient.setPatientName("ram");
 		patient.setPrescription("crocine");
-		
+
 		testEntityManager.persist(patient);
-		Patient getFromDb=patientRepository.findById(1).get();
+		Patient getFromDb = patientRepository.findById(1).get();
 		getFromDb.setPrescription("crocine");
 		testEntityManager.persist(getFromDb);
 
 		assertThat(getFromDb.getPrescription()).isEqualTo("crocine");
 	}
-	
+
 }
